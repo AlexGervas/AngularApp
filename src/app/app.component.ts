@@ -1,66 +1,19 @@
-import {Component} from '@angular/core';
-
-class Item {
-  purchase: string;
-  done: boolean;
-  price: number;
-
-  constructor(purchase: string, price: number) {
-
-    this.purchase = purchase;
-    this.price = price;
-    this.done = false;
-  }
-}
+import { NewsService } from './core/news/news.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { NewsItem } from './core/models/news-item';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'purchase-app',
-  template: `
-    <div class="page-header">
-      <h1> Список покупок </h1>
-    </div>
-    <div class="panel">
-      <div class="form-inline">
-        <div class="form-group">
-          <div class="col-md-8">
-            <input class="form-control" [(ngModel)]="text" placeholder="Название"/>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="col-md-6">
-            <input type="number" class="form-control" [(ngModel)]="price" placeholder="Цена"/>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="col-md-offset-2 col-md-8">
-            <button class="btn btn-default" (click)="addItem(text, price)">Добавить</button>
-          </div>
-        </div>
-      </div>
-      <table class="table table-striped">
-        <thead>
-        <tr>
-          <th>Предмет</th>
-          <th>Цена</th>
-          <th>Куплено</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let item of items">
-          <td>{{item.purchase}}</td>
-          <td>{{item.price}}</td>
-          <td><input type="checkbox" [(ngModel)]="item.done"/></td>
-        </tr>
-        </tbody>
-      </table>
-    </div>`
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit, OnDestroy {
   text: string;
   price: number = 0;
 
-  items: Item[] =
+  items: NewsItem[] =
     [
       {purchase: "Хлеб", done: false, price: 15.9},
       {purchase: "Масло", done: false, price: 60},
@@ -68,10 +21,36 @@ export class AppComponent {
       {purchase: "Сыр", done: false, price: 310}
     ];
 
+  // Все http-запросы в ангуляре возвращают Observable, это потом Subscription,
+  // у которых есть свои события типа complete (который означает что данные получены, подписка завершена) и многие другие
+  // грубо говоря что-то типа Promise в javascript
+  private subs: Subscription = new Subscription();
+
+  constructor(private newsService: NewsService) { }
+
+  /** Метод жизненного цикла компонента, который срабатывает при инициализации приложения,
+   * сразу же отправляем запрос на получение новостей
+   */
+  ngOnInit() {
+    this.loadTopHeadlines();
+  }
+
+  // Отписываемся от всех подписок разом, когда компонент уничтожается
+  ngOnDestroy() {
+    this.subs.unsubscribe();
+  }
+
   addItem(text: string, price: number): void {
 
     if (text == null || text.trim() == "" || price == null)
       return;
-    this.items.push(new Item(text, price));
+    this.items.push({ purchase: text, price: price, done: false });
+  }
+
+  private loadTopHeadlines() {
+    // Добавляем запрос в subs, чтобы в будущем можно было отписаться от него
+    this.subs.add(this.newsService.getTopHeadlines().subscribe(newsItems => {
+      console.log(newsItems);
+    }));
   }
 }
