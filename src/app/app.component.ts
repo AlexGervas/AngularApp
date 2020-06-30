@@ -1,17 +1,19 @@
-import { NewsService } from './core/news/news.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { NewsItem } from './core/models/news-item';
-import { Subscription } from 'rxjs';
+import {NewsService} from './core/news/news.service';
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {NewsItem} from './core/models/news-item';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'purchase-app',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [NewsService]
 })
 
 export class AppComponent implements OnInit, OnDestroy {
   text: string;
   price: number = 0;
+  posts: string[];
 
   items: NewsItem[] =
     [
@@ -21,18 +23,22 @@ export class AppComponent implements OnInit, OnDestroy {
       {purchase: "Сыр", done: false, price: 310}
     ];
 
+  // items: NewsItem[]=
+
   // Все http-запросы в ангуляре возвращают Observable, это потом Subscription,
   // у которых есть свои события типа complete (который означает что данные получены, подписка завершена) и многие другие
   // грубо говоря что-то типа Promise в javascript
   private subs: Subscription = new Subscription();
 
-  constructor(private newsService: NewsService) { }
+  constructor(private newsService: NewsService) {
+  }
 
   /** Метод жизненного цикла компонента, который срабатывает при инициализации приложения,
    * сразу же отправляем запрос на получение новостей
    */
   ngOnInit() {
     this.loadTopHeadlines();
+    // this.NewsService.loadFeed().subscribe(resp => this.posts = resp.items)
   }
 
   // Отписываемся от всех подписок разом, когда компонент уничтожается
@@ -44,13 +50,14 @@ export class AppComponent implements OnInit, OnDestroy {
 
     if (text == null || text.trim() == "" || price == null)
       return;
-    this.items.push({ purchase: text, price: price, done: false });
+    this.items.push({purchase: text, price: price, done: false});
   }
 
   private loadTopHeadlines() {
     // Добавляем запрос в subs, чтобы в будущем можно было отписаться от него
     this.subs.add(this.newsService.getTopHeadlines().subscribe(newsItems => {
       console.log(newsItems);
+      this.items.push(newsItems);
     }));
   }
 }

@@ -1,5 +1,6 @@
+<script src="app.component.ts"></script>
 <div class="page-header">
-  <h1> Список покупок </h1>
+  <h1 align="center"><p>Список покупок </p></h1>
 </div>
 <div class="panel">
   <div class="form-inline">
@@ -35,4 +36,20 @@
     </tr>
     </tbody>
   </table>
+</div>
+
+<div class="page-header">
+  <h1 align="center"><p> Новости </p></h1>
+</div>
+<div class="post">
+  <div *ngFor="let post of posts">
+<!--    <h1> {{ post.title }} </h1>-->
+<!--    <p> {{ post.content }} </p>-->
+  </div>
+</div>
+<div class="footer">
+  <div class="container">
+    <div class="row">
+    </div>
+  </div>
 </div>

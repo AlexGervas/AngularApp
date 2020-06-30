@@ -7,3 +7,8 @@ export interface NewsItem {
   done: boolean;
   price: number;
 }
+
+export interface newsItem {
+  title: string;
+  description: string;
+}
