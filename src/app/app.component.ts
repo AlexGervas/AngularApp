@@ -1,7 +1,8 @@
 import {NewsService} from './core/news/news.service';
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {NewsItem} from './core/models/news-item';
-import {Subscription} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
+import {News2Item} from "./core/models/news2-item";
 
 @Component({
   selector: 'purchase-app',
@@ -13,7 +14,7 @@ import {Subscription} from 'rxjs';
 export class AppComponent implements OnInit, OnDestroy {
   text: string;
   price: number = 0;
-  posts: string[];
+  // posts: string[];
 
   items: NewsItem[] =
     [
@@ -22,13 +23,13 @@ export class AppComponent implements OnInit, OnDestroy {
       {purchase: "Картофель", done: true, price: 22.6},
       {purchase: "Сыр", done: false, price: 310}
     ];
-
-  // items: NewsItem[]=
+  posts: News2Item[]
 
   // Все http-запросы в ангуляре возвращают Observable, это потом Subscription,
   // у которых есть свои события типа complete (который означает что данные получены, подписка завершена) и многие другие
   // грубо говоря что-то типа Promise в javascript
   private subs: Subscription = new Subscription();
+  private subs2: Subscription = new Subscription();
 
   constructor(private newsService: NewsService) {
   }
@@ -38,12 +39,14 @@ export class AppComponent implements OnInit, OnDestroy {
    */
   ngOnInit() {
     this.loadTopHeadlines();
+    this.loadPosts();
     // this.NewsService.loadFeed().subscribe(resp => this.posts = resp.items)
   }
 
   // Отписываемся от всех подписок разом, когда компонент уничтожается
   ngOnDestroy() {
     this.subs.unsubscribe();
+    this.subs2.unsubscribe();
   }
 
   addItem(text: string, price: number): void {
@@ -58,6 +61,14 @@ export class AppComponent implements OnInit, OnDestroy {
     this.subs.add(this.newsService.getTopHeadlines().subscribe(newsItems => {
       console.log(newsItems);
       this.items.push(newsItems);
+    }));
+  }
+
+  private loadPosts() {
+    this.subs2.add(this.newsService.getData().subscribe(news2Item => {
+      console.log(news2Item);
+      // @ts-ignore
+      this.posts.push(news2Item);
     }));
   }
 }
