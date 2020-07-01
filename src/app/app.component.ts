@@ -14,7 +14,7 @@ import {News2Item} from "./core/models/news2-item";
 export class AppComponent implements OnInit, OnDestroy {
   text: string;
   price: number = 0;
-  // posts: string[];
+  posts: News2Item[] = [];
 
   items: NewsItem[] =
     [
@@ -23,13 +23,11 @@ export class AppComponent implements OnInit, OnDestroy {
       {purchase: "Картофель", done: true, price: 22.6},
       {purchase: "Сыр", done: false, price: 310}
     ];
-  posts: News2Item[]
 
   // Все http-запросы в ангуляре возвращают Observable, это потом Subscription,
   // у которых есть свои события типа complete (который означает что данные получены, подписка завершена) и многие другие
   // грубо говоря что-то типа Promise в javascript
   private subs: Subscription = new Subscription();
-  private subs2: Subscription = new Subscription();
 
   constructor(private newsService: NewsService) {
   }
@@ -39,14 +37,12 @@ export class AppComponent implements OnInit, OnDestroy {
    */
   ngOnInit() {
     this.loadTopHeadlines();
-    this.loadPosts();
-    // this.NewsService.loadFeed().subscribe(resp => this.posts = resp.items)
+    // this.loadPosts();
   }
 
   // Отписываемся от всех подписок разом, когда компонент уничтожается
   ngOnDestroy() {
     this.subs.unsubscribe();
-    this.subs2.unsubscribe();
   }
 
   addItem(text: string, price: number): void {
@@ -58,17 +54,18 @@ export class AppComponent implements OnInit, OnDestroy {
 
   private loadTopHeadlines() {
     // Добавляем запрос в subs, чтобы в будущем можно было отписаться от него
-    this.subs.add(this.newsService.getTopHeadlines().subscribe(newsItems => {
-      console.log(newsItems);
-      this.items.push(newsItems);
+    this.subs.add(this.newsService.getData().subscribe(news2Item => {
+      console.log(news2Item);
+      // @ts-ignore
+      this.posts = news2Item;
     }));
   }
 
-  private loadPosts() {
-    this.subs2.add(this.newsService.getData().subscribe(news2Item => {
-      console.log(news2Item);
-      // @ts-ignore
-      this.posts.push(news2Item);
-    }));
-  }
+  // private loadPosts() {
+  //   this.subs2.add(this.newsService.getData().subscribe(news2Item => {
+  //     console.log(news2Item);
+  //     // @ts-ignore
+  //     this.posts.push(news2Item);
+  //   }));
+  // }
 }

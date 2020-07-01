@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {News2Item} from "../models/news2-item";
-
-// import 'rxjs/add/operator/map';
+import {map} from "rxjs/operators";
+import {NewsApiResponse} from "../models/NewsApiResponse";
 
 /**
  * Эта часть нужна для если планируется сервис использовать только в app.component и больше нигде
@@ -14,10 +14,6 @@ import {News2Item} from "../models/news2-item";
  * })
  */
 
-export interface Feed {
-  [key: string]: any;
-}
-
 @Injectable()
 export class NewsService {
 
@@ -25,14 +21,10 @@ export class NewsService {
   }
 
   /** Вместо <any> лучше чтобы был какой-нибудь интерфейс, например, NewsItem[], раз ангуляре тайпскрипт желательно чтобы была типизация */
-  getTopHeadlines(): Observable<any> {
-    // apiKey желательно не быть здесь, желательно чтобы он был в HttpInterceptor где он будет автоматически добавлятся ко всем запросам к newsapi.org
-    return this.http.get('https://newsapi.org/v2/top-headlines?country=ru&apiKey=a3985037878a4117bec348bbc67881ba')
-    // .map(response => response.json().data as Feed);
-  }
-
   getData(): Observable<News2Item[]> {
-    return this.http.get<News2Item[]>('https://newsapi.org/v2/top-headlines?country=ru&apiKey=a3985037878a4117bec348bbc67881ba')
+    // apiKey желательно не быть здесь, желательно чтобы он был в HttpInterceptor где он будет автоматически добавлятся ко всем запросам к newsapi.org
+    return this.http.get<NewsApiResponse>('https://newsapi.org/v2/top-headlines?country=ru&apiKey=a3985037878a4117bec348bbc67881ba').pipe(
+      map((news: NewsApiResponse) => news.articles)
+    )
   }
-
 }

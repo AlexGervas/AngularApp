@@ -1,4 +1,3 @@
-<script src="app.component.ts"></script>
 <div class="page-header">
   <h1 align="center"><p>Список покупок </p></h1>
 </div>
@@ -43,8 +42,11 @@
 </div>
 <div class="post">
   <div *ngFor="let post of posts">
+    <!--    console.log(post)-->
     <h1> {{ post.title }} </h1>
-    <p> {{ post.description }} </p>
+    <h2><p> {{ post.description }} </p></h2>
+
+
   </div>
 </div>
 <div class="footer">
