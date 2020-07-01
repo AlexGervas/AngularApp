@@ -39,10 +39,22 @@
 
 <div class="page-header">
   <h1 align="center"><p> Новости </p></h1>
+  <hr>
   <div class="container" *ngFor="let post of posts">
     <!--    console.log(post)-->
     <h1 align="center"> {{ post.title }} </h1><br>
     <h2><p> {{ post.description }} </p></h2>
+    <br>
+    <p><img src="{{post.urlToImage}}" width="450" height="450" border="0" alt="Пример"></p><br>
+    <p>
+      <font size="4">Для подробной информации, перейдите по ссылке: <a href="{{post.url}}">Additionally</a></font>
+    </p>
+    <p align="right">
+      <font size="4">
+        {{post.author}} <br>
+        Date: {{post.publishedAt}}
+      </font>
+    </p>
     <hr>
   </div>
 </div>
