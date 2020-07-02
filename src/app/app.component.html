@@ -40,22 +40,40 @@
 <div class="page-header">
   <h1 align="center"><p> Новости </p></h1>
   <hr>
-  <div class="container" *ngFor="let post of posts">
-    <!--    console.log(post)-->
-    <h1 align="center"> {{ post.title }} </h1><br>
-    <h2><p> {{ post.description }} </p></h2>
-    <br>
-    <p><img src="{{post.urlToImage}}" width="450" height="450" border="0" alt="Пример"></p><br>
-    <p>
-      <font size="4">Для подробной информации, перейдите по ссылке: <a href="{{post.url}}">Additionally</a></font>
-    </p>
-    <p align="right">
-      <font size="4">
-        {{post.author}} <br>
-        Date: {{post.publishedAt}}
-      </font>
-    </p>
-    <hr>
+  <div class="card-deck">
+    <div class="container" *ngFor="let post of posts">
+
+      <div class="card">
+        <img class="card-img-top" src="{{post.urlToImage}}" alt="Card image cap">
+        <div class="card-body">
+          <h1 class="card-title" align="center">{{post.title}}</h1>
+          <p class="card-text"><font size="4">{{ post.description }}</font></p>
+          <a href="{{post.url}}" class="btn btn-primary" target="_blank"><h4>Additionally</h4></a>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted" align="right"><font size="2">
+            {{post.author}}<br>
+            Date: {{post.publishedAt}}
+          </font>
+          </small>
+        </div>
+      </div>
+      <br>
+
+      <!--      <h1 align="center"> {{ post.title }} </h1><br>-->
+      <!--      <h2><p> {{ post.description }} </p></h2>-->
+      <!--      <br>-->
+      <!--      <p><img src="{{post.urlToImage}}" width="450" height="450" border="0" alt="Пример"></p><br>-->
+      <!--      <p>-->
+      <!--        <font size="4">Для подробной информации, перейдите по ссылке: <a href="{{post.url}}">Additionally</a></font>-->
+      <!--      </p>-->
+      <!--      <p align="right">-->
+      <!--        <font size="4">-->
+      <!--          {{post.author}}<br>-->
+      <!--          Date: {{post.publishedAt}}-->
+      <!--        </font>-->
+      <!--      </p>-->
+      <!--      <hr>-->
+    </div>
   </div>
 </div>
-
