@@ -56,16 +56,7 @@ export class AppComponent implements OnInit, OnDestroy {
     // Добавляем запрос в subs, чтобы в будущем можно было отписаться от него
     this.subs.add(this.newsService.getData().subscribe(news2Item => {
       console.log(news2Item);
-      // @ts-ignore
       this.posts = news2Item;
     }));
   }
-
-  // private loadPosts() {
-  //   this.subs2.add(this.newsService.getData().subscribe(news2Item => {
-  //     console.log(news2Item);
-  //     // @ts-ignore
-  //     this.posts.push(news2Item);
-  //   }));
-  // }
 }
