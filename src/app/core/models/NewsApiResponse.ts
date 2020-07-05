@@ -1,4 +1,4 @@
-import {News2Item} from "./news2-item";
+import { News2Item } from "./news2-item";
 
 export interface NewsApiResponse {
   status: string;

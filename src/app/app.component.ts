@@ -1,8 +1,8 @@
-import {NewsService} from './core/news/news.service';
-import {Component, OnInit, OnDestroy} from '@angular/core';
-import {NewsItem} from './core/models/news-item';
-import {Observable, Subscription} from 'rxjs';
-import {News2Item} from "./core/models/news2-item";
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { NewsService } from './core/news/news.service';
+import { NewsItem } from './core/models/news-item';
+import { Observable, Subscription } from 'rxjs';
+import { News2Item } from "./core/models/news2-item";
 
 @Component({
   selector: 'purchase-app',
@@ -15,6 +15,7 @@ export class AppComponent implements OnInit, OnDestroy {
   text: string;
   price: number = 0;
   posts: News2Item[] = [];
+  value: number;
 
   items: NewsItem[] =
     [
@@ -50,6 +51,16 @@ export class AppComponent implements OnInit, OnDestroy {
     if (text == null || text.trim() == "" || price == null)
       return;
     this.items.push({purchase: text, price: price, done: false});
+  }
+
+  addSwitch(event: number) {
+    this.value = event;
+  }
+
+  condition: boolean = true;
+
+  toggle() {
+    this.condition = !this.condition;
   }
 
   private loadTopHeadlines() {

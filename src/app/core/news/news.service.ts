@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {News2Item} from "../models/news2-item";
-import {map} from "rxjs/operators";
-import {NewsApiResponse} from "../models/NewsApiResponse";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { News2Item } from "../models/news2-item";
+import { map } from "rxjs/operators";
+import { NewsApiResponse } from "../models/NewsApiResponse";
 
 /**
  * Эта часть нужна для если планируется сервис использовать только в app.component и больше нигде
