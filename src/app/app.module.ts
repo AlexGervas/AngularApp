@@ -5,11 +5,13 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CoreModule } from './core/core.module';
+import { MenuComponent } from './components/menu/menu.component';
+import { CompanyComponent } from './components/company/company.component';
 
 @NgModule({
   // Импортируем CoreModule вместе со всеми сервисами что там есть
   imports: [BrowserModule, FormsModule, NgbModule, HttpClientModule, CoreModule],
-  declarations: [AppComponent],
+  declarations: [AppComponent, MenuComponent, CompanyComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {
