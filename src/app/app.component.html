@@ -1,9 +1,9 @@
 <menu_header class="menu"></menu_header>
 
 <button (click)="toggle()">Тык</button>
-<div *ngIf="condition; then thenBlock else elseBlock"></div>
+<div *ngIf="condition; then shopBlock else newsBlock"></div>
 
-<ng-template #thenBlock>
+<ng-template #shopBlock>
   <div class="page-header">
     <h1 align="center"><p> Список покупок </p></h1>
   </div>
@@ -44,7 +44,7 @@
   </div>
 </ng-template>
 
-<ng-template class="news" #elseBlock>
+<ng-template class="news" #newsBlock>
   <div class="page-header">
     <h1 align="center"><p> Новости </p></h1>
     <hr>
