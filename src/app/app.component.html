@@ -1,4 +1,5 @@
 <menu_header class="menu"></menu_header>
+<main-page class="mainPage"></main-page>
 
 <button (click)="toggle()">Тык</button>
 <div *ngIf="condition; then shopBlock else newsBlock"></div>
@@ -8,32 +9,7 @@
 </ng-template>
 
 <ng-template class="news" #newsBlock>
-  <div class="page-header">
-    <h1 align="center"><p> Новости </p></h1>
-    <hr>
-    <div class="card-deck">
-      <div class="container" *ngFor="let post of posts">
-
-        <div class="card">
-          <img class="card-img-top" src="{{post.urlToImage}}" alt="Card image cap">
-          <div class="card-body">
-            <h1 class="card-title" align="center">{{post.title}}</h1>
-            <p class="card-text"><font size="4">{{ post.description }}</font></p>
-            <a href="{{post.url}}" class="btn btn-primary" target="_blank"><h4>Additionally</h4></a>
-          </div>
-          <div class="card-footer">
-            <small class="text-muted" align="right"><font size="2"><p align="right">
-              {{post.author}}<br>
-              Date: {{post.publishedAt}}
-            </p>
-            </font>
-            </small>
-          </div>
-        </div>
-        <br>
-      </div>
-    </div>
-  </div>
+  <news-list></news-list>
 </ng-template>
 
 <company_header></company_header>
