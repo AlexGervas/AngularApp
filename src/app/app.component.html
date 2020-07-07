@@ -1,15 +1,16 @@
 <menu_header class="menu"></menu_header>
-<main-page class="mainPage"></main-page>
+<!--<main-page class="mainPage"></main-page>-->
+<router-outlet></router-outlet>
 
-<button (click)="toggle()">Тык</button>
-<div *ngIf="condition; then shopBlock else newsBlock"></div>
+<!--<button (click)="toggle()">Тык</button>-->
+<!--<div *ngIf="condition; then shopBlock else newsBlock"></div>-->
 
-<ng-template #shopBlock>
-  <shop-list></shop-list>
-</ng-template>
+<!--<ng-template #shopBlock>-->
+<!--  <shop-list></shop-list>-->
+<!--</ng-template>-->
 
-<ng-template class="news" #newsBlock>
-  <news-list></news-list>
-</ng-template>
+<!--<ng-template class="news" #newsBlock>-->
+<!--  <news-list></news-list>-->
+<!--</ng-template>-->
 
 <company_header></company_header>

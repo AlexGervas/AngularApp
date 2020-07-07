@@ -13,9 +13,17 @@ import { ShopListComponent } from './components/shop-list/shop-list.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
 import { NewsComponent } from './components/news/news.component';
 
+// определение маршрутов
+const appRoutes: Routes = [
+  {path: '', component: MainPageComponent},
+  {path: 'home', component: MainPageComponent},
+  {path: 'news', component: NewsComponent},
+  {path: 'shop-list', component: ShopListComponent}
+];
+
 @NgModule({
   // Импортируем CoreModule вместе со всеми сервисами что там есть
-  imports: [BrowserModule, FormsModule, NgbModule, HttpClientModule, CoreModule],
+  imports: [BrowserModule, FormsModule, NgbModule, HttpClientModule, CoreModule, RouterModule.forRoot(appRoutes)],
   declarations: [AppComponent, MenuComponent, CompanyComponent, ShopListComponent, MainPageComponent, NewsComponent],
   bootstrap: [AppComponent]
 })
