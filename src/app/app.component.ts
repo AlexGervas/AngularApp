@@ -12,18 +12,9 @@ import { News2Item } from "./core/models/news2-item";
 })
 
 export class AppComponent implements OnInit, OnDestroy {
-  text: string;
-  price: number = 0;
+
   posts: News2Item[] = [];
   value: number;
-
-  items: NewsItem[] =
-    [
-      {purchase: "Хлеб", done: false, price: 15.9},
-      {purchase: "Масло", done: false, price: 60},
-      {purchase: "Картофель", done: true, price: 22.6},
-      {purchase: "Сыр", done: false, price: 310}
-    ];
 
   // Все http-запросы в ангуляре возвращают Observable, это потом Subscription,
   // у которых есть свои события типа complete (который означает что данные получены, подписка завершена) и многие другие
@@ -38,19 +29,11 @@ export class AppComponent implements OnInit, OnDestroy {
    */
   ngOnInit() {
     this.loadTopHeadlines();
-    // this.loadPosts();
   }
 
   // Отписываемся от всех подписок разом, когда компонент уничтожается
   ngOnDestroy() {
     this.subs.unsubscribe();
-  }
-
-  addItem(text: string, price: number): void {
-
-    if (text == null || text.trim() == "" || price == null)
-      return;
-    this.items.push({purchase: text, price: price, done: false});
   }
 
   addSwitch(event: number) {

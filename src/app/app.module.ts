@@ -7,11 +7,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CoreModule } from './core/core.module';
 import { MenuComponent } from './components/menu/menu.component';
 import { CompanyComponent } from './components/company/company.component';
+import { ShopListComponent } from './components/shop-list/shop-list.component';
 
 @NgModule({
   // Импортируем CoreModule вместе со всеми сервисами что там есть
   imports: [BrowserModule, FormsModule, NgbModule, HttpClientModule, CoreModule],
-  declarations: [AppComponent, MenuComponent, CompanyComponent],
+  declarations: [AppComponent, MenuComponent, CompanyComponent, ShopListComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {
