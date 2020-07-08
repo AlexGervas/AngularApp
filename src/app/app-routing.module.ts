@@ -9,10 +9,10 @@ import { CoreModule } from './core/core.module';
 import { Routes, RouterModule } from '@angular/router';
 import { MenuComponent } from './components/menu/menu.component';
 import { CompanyComponent } from './components/company/company.component';
-import { ShopListComponent } from './components/shop-list/shop-list.component';
-import { MainPageComponent } from './components/main-page/main-page.component';
-import { NewsComponent } from './components/news/news.component';
-import { NotFoundComponent } from './components/not-found/not-found.component';
+import { ShopListComponent } from './pages/shop-list/shop-list.component';
+import { MainPageComponent } from './pages/main-page/main-page.component';
+import { NewsComponent } from './pages/news/news.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 // определение маршрутов
 const appRoutes: Routes = [
