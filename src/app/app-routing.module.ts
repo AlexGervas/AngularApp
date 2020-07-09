@@ -1,14 +1,6 @@
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-import { AppComponent } from './app.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { CoreModule } from './core/core.module';
 
 import { Routes, RouterModule } from '@angular/router';
-import { MenuComponent } from './components/menu/menu.component';
-import { CompanyComponent } from './components/company/company.component';
 import { ShopListComponent } from './pages/shop-list/shop-list.component';
 import { MainPageComponent } from './pages/main-page/main-page.component';
 import { NewsComponent } from './pages/news/news.component';
@@ -24,9 +16,12 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-  // Импортируем CoreModule вместе со всеми сервисами что там есть
-  imports: [BrowserModule, FormsModule, NgbModule, HttpClientModule, CoreModule, RouterModule.forRoot(appRoutes)],
-  declarations: [AppComponent, MenuComponent, CompanyComponent, ShopListComponent, MainPageComponent, NewsComponent, NotFoundComponent],
+  imports: [
+    RouterModule.forRoot(appRoutes)
+  ],
+  exports: [
+    RouterModule
+  ]
 })
 
 export class AppRoutingModule {

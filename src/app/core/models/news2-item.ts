@@ -4,7 +4,10 @@
 // Модель через class создаем только в том случае если нам надо какие-то данные полученные от API привести к какой-нибудь
 
 export interface News2Item {
-  source: string;
+  source: {
+    id: string;
+    name: string;
+  };
   author: string;
   title: string;
   description: string;
