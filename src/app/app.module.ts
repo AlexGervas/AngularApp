@@ -12,11 +12,12 @@ import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { CoreModule } from "./core/core.module";
+import { ButtonUpComponent } from './components/button-up/button-up.component';
 
 @NgModule({
   imports: [AppRoutingModule, BrowserModule, FormsModule, NgbModule, HttpClientModule, CoreModule],
   bootstrap: [AppComponent],
-  declarations: [AppComponent, MenuComponent, CompanyComponent, ShopListComponent, MainPageComponent, NewsComponent, NotFoundComponent]
+  declarations: [AppComponent, MenuComponent, CompanyComponent, ShopListComponent, MainPageComponent, NewsComponent, NotFoundComponent, ButtonUpComponent]
 })
 
 export class AppModule {
